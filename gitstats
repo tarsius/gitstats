@@ -41,6 +41,7 @@ conf = {
 	'max_ext_length': 10,
 	'style': 'gitstats.css',
 	'max_authors': 20,
+	'graph_max_authors': 8,
 	'authors_top': 5,
 	'commit_begin': '',
 	'commit_end': 'HEAD',
@@ -942,13 +943,13 @@ class HTMLReportCreator(ReportCreator):
 
 		f.write(html_header(2, 'Cumulated Added Lines of Code per Author'))
 		f.write('<img src="lines_of_code_by_author.png" alt="Lines of code per Author">')
-		if len(allauthors) > conf['max_authors']:
-			f.write('<p class="moreauthors">Only top %d authors shown</p>' % conf['max_authors'])
+		if len(allauthors) > conf['graph_max_authors']:
+			f.write('<p class="moreauthors">Only top %d authors shown</p>' % conf['graph_max_authors'])
 
 		f.write(html_header(2, 'Commits per Author'))
 		f.write('<img src="commits_by_author.png" alt="Commits per Author">')
-		if len(allauthors) > conf['max_authors']:
-			f.write('<p class="moreauthors">Only top %d authors shown</p>' % conf['max_authors'])
+		if len(allauthors) > conf['graph_max_authors']:
+			f.write('<p class="moreauthors">Only top %d authors shown</p>' % conf['graph_max_authors'])
 
 		fgl = open(path + '/lines_of_code_by_author.dat', 'w')
 		fgc = open(path + '/commits_by_author.dat', 'w')
@@ -964,7 +965,7 @@ class HTMLReportCreator(ReportCreator):
 		# time. Be robust and keep the list in a variable.
 		commits_by_authors = {} # cumulated added lines by
 
-		self.authors_to_plot = data.getAuthors(conf['max_authors'])
+		self.authors_to_plot = data.getAuthors(conf['graph_max_authors'])
 		for author in self.authors_to_plot:
 			lines_by_authors[author] = 0
 			commits_by_authors[author] = 0
