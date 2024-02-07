@@ -906,18 +906,6 @@ class HTMLReportCreator(ReportCreator):
 		f.write('</table></div>')
 		f.write('<img src="month_of_year.png" alt="Month of Year">')
 
-		# Commits by year/month
-		f.write(html_header(2, 'Commits by year/month'))
-		f.write('<div class="vtable"><table><tr><th>Month</th><th>Commits</th><th>Lines added</th><th>Lines removed</th></tr>')
-		for yymm in reversed(sorted(data.commits_by_month.keys())):
-			f.write('<tr><td>%s</td><td>%d</td><td>%d</td><td>%d</td></tr>' % (yymm, data.commits_by_month.get(yymm,0), data.lines_added_by_month.get(yymm,0), data.lines_removed_by_month.get(yymm,0)))
-		f.write('</table></div>')
-		f.write('<img src="commits_by_year_month.png" alt="Commits by year/month">')
-		fg = open(path + '/commits_by_year_month.dat', 'w')
-		for yymm in sorted(data.commits_by_month.keys()):
-			fg.write('%s %s\n' % (yymm, data.commits_by_month[yymm]))
-		fg.close()
-
 		# Commits by year
 		f.write(html_header(2, 'Commits by Year'))
 		f.write('<div class="vtable"><table><tr><th>Year</th><th>Commits (% of all)</th><th>Lines added</th><th>Lines removed</th></tr>')
@@ -928,6 +916,18 @@ class HTMLReportCreator(ReportCreator):
 		fg = open(path + '/commits_by_year.dat', 'w')
 		for yy in sorted(data.commits_by_year.keys()):
 			fg.write('%d %d\n' % (yy, data.commits_by_year[yy]))
+		fg.close()
+
+		# Commits by year/month
+		f.write(html_header(2, 'Commits by year/month'))
+		f.write('<div class="vtable"><table><tr><th>Month</th><th>Commits</th><th>Lines added</th><th>Lines removed</th></tr>')
+		for yymm in reversed(sorted(data.commits_by_month.keys())):
+			f.write('<tr><td>%s</td><td>%d</td><td>%d</td><td>%d</td></tr>' % (yymm, data.commits_by_month.get(yymm,0), data.lines_added_by_month.get(yymm,0), data.lines_removed_by_month.get(yymm,0)))
+		f.write('</table></div>')
+		f.write('<img src="commits_by_year_month.png" alt="Commits by year/month">')
+		fg = open(path + '/commits_by_year_month.dat', 'w')
+		for yymm in sorted(data.commits_by_month.keys()):
+			fg.write('%s %s\n' % (yymm, data.commits_by_month[yymm]))
 		fg.close()
 
 		###
