@@ -775,7 +775,7 @@ class HTMLReportCreator(ReportCreator):
 		#f.write('<h2>Last 12 months</h2>')
 
 		# Weekly activity
-		WEEKS = 32
+		WEEKS = 52
 		f.write(html_header(2, 'Weekly activity'))
 		f.write('<p>Last %d weeks</p>' % WEEKS)
 
@@ -799,12 +799,12 @@ class HTMLReportCreator(ReportCreator):
 			if weeks[i] in data.activity_by_year_week:
 				percentage = float(data.activity_by_year_week[weeks[i]]) / data.activity_by_year_week_peak
 			height = max(1, int(200 * percentage))
-			f.write('<td style="text-align: center; vertical-align: bottom">%d<div style="display: block; background-color: red; width: 20px; height: %dpx"></div></td>' % (commits, height))
+			f.write('<td style="font-size: 0.75em; text-align: center; vertical-align: bottom">%d<div style="display: block; background-color: red; width: 8px; height: %dpx"></div></td>' % (commits, height))
 
 		# bottom row: year/week
 		f.write('</tr><tr>')
 		for i in range(0, WEEKS):
-			f.write('<td>%s</td>' % (WEEKS - i))
+			f.write('<td style="font-size: 0.75em">%s</td>' % (WEEKS - i))
 		f.write('</tr></table>')
 
 		# Hour of Day
