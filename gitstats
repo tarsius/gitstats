@@ -983,7 +983,7 @@ class HTMLReportCreator(ReportCreator):
 		fgl.close()
 		fgc.close()
 
-                # Authors :: List of authors
+		# Authors :: List of authors
 		f.write(html_header(2, 'List of Authors'))
 
 		f.write('<table class="authors sortable" id="authors">')
@@ -993,7 +993,7 @@ class HTMLReportCreator(ReportCreator):
 			f.write('<tr><td>%s</td><td>%d (%.2f%%)</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%d</td><td>%d</td></tr>' % (author, info['commits'], info['commits_frac'], info['lines_added'], info['lines_removed'], info['date_first'], info['date_last'], info['timedelta'], len(info['active_days']), info['place_by_commits']))
 		f.write('</table>')
 
-                if len(allauthors) > conf['max_authors']:
+		if len(allauthors) > conf['max_authors']:
 			rest = allauthors[conf['max_authors']:]
 			f.write('<p class="moreauthors">These didn\'t make it to the top: %s</p>' % ', '.join(rest))
 
@@ -1344,7 +1344,7 @@ plot """
 </ul>
 </div>
 """)
-		
+
 def usage():
 	print """
 Usage: gitstats [options] <gitpath..> <outputpath>
@@ -1357,7 +1357,6 @@ Default config values:
 
 Please see the manual page for more details.
 """ % conf
-
 
 class GitStats:
 	def run(self, args_orig):
@@ -1433,4 +1432,3 @@ class GitStats:
 if __name__=='__main__':
 	g = GitStats()
 	g.run(sys.argv[1:])
-
