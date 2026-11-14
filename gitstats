@@ -94,7 +94,7 @@ def getkeyssortedbyvaluekey(d, key):
 	return [el[1] for el in sorted([(d[el][key], el) for el in list(d.keys())])]
 
 def getstatsummarycounts(line):
-	numbers = re.findall('\d+', line)
+	numbers = re.findall('\\d+', line)
 	if   len(numbers) == 1:
 		# neither insertions nor deletions: may probably only happen for "0 files changed"
 		numbers.append(0);
@@ -317,7 +317,7 @@ class GitDataCollector(DataCollector):
 				continue
 			prev = tag
 			for line in output.split('\n'):
-				parts = re.split('\s+', line, 2)
+				parts = re.split('\\s+', line, 2)
 				commits = int(parts[1])
 				author = parts[2]
 				self.tags[tag]['commits'] += commits
@@ -477,7 +477,7 @@ class GitDataCollector(DataCollector):
 		for line in lines:
 			if len(line) == 0:
 				continue
-			parts = re.split('\s+', line, 4)
+			parts = re.split('\\s+', line, 4)
 			if parts[0] == '160000' and parts[3] == '-':
 				# skip submodules
 				continue
