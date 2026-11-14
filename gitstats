@@ -196,7 +196,7 @@ class DataCollector:
 	def collect(self, dir):
 		self.dir = dir
 		if len(conf['project_name']) == 0:
-			self.projectname = os.path.basename(os.path.abspath(dir))
+			self.projectname = os.path.basename(dir)
 		else:
 			self.projectname = conf['project_name']
 	
@@ -1400,6 +1400,7 @@ class GitStats:
 		data.loadCache(cachefile)
 
 		for gitpath in args[0:-1]:
+			gitpath = os.path.abspath(gitpath)
 			print('Git path: %s' % gitpath)
 
 			prevdir = os.getcwd()
