@@ -743,7 +743,7 @@ class HTMLReportCreator(ReportCreator):
 
 		f = open(path + "/index.html", 'w')
 		format = '%Y-%m-%d %H:%M:%S'
-		self.printHeader(f)
+		self.printHeader(f, "summary")
 
 		f.write('<h1>GitStats - %s</h1>' % data.projectname)
 
@@ -767,7 +767,7 @@ class HTMLReportCreator(ReportCreator):
 		###
 		# Activity
 		f = open(path + '/activity.html', 'w')
-		self.printHeader(f)
+		self.printHeader(f, "activity")
 		f.write('<h1>Activity</h1>')
 		self.printNav(f)
 
@@ -934,7 +934,7 @@ class HTMLReportCreator(ReportCreator):
 		###
 		# Authors
 		f = open(path + '/authors.html', 'w')
-		self.printHeader(f)
+		self.printHeader(f, "authors")
 
 		f.write('<h1>Authors</h1>')
 		self.printNav(f)
@@ -1027,7 +1027,7 @@ class HTMLReportCreator(ReportCreator):
 		###
 		# Files
 		f = open(path + '/files.html', 'w')
-		self.printHeader(f)
+		self.printHeader(f, "files")
 		f.write('<h1>Files</h1>')
 		self.printNav(f)
 
@@ -1078,7 +1078,7 @@ class HTMLReportCreator(ReportCreator):
 		###
 		# Lines
 		f = open(path + '/lines.html', 'w')
-		self.printHeader(f)
+		self.printHeader(f, "lines")
 		f.write('<h1>Lines</h1>')
 		self.printNav(f)
 
@@ -1100,7 +1100,7 @@ class HTMLReportCreator(ReportCreator):
 		###
 		# tags.html
 		f = open(path + '/tags.html', 'w')
-		self.printHeader(f)
+		self.printHeader(f, "tags")
 		f.write('<h1>Tags</h1>')
 		self.printNav(f)
 
@@ -1317,19 +1317,19 @@ plot """
 			if len(out) > 0:
 				print(out)
 
-	def printHeader(self, f, title = ''):
+	def printHeader(self, f, page):
 		f.write(
 """<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>GitStats - %s</title>
+	<title>%s - %s</title>
 	<link rel="stylesheet" href="%s" type="text/css">
 	<meta name="generator" content="GitStats %s">
 	<script type="text/javascript" src="sortable.js"></script>
 </head>
 <body>
-""" % (self.projectname, conf['style'], getversion()))
+""" % (self.projectname, page, conf['style'], getversion()))
 
 	def printNav(self, f):
 		f.write("""
