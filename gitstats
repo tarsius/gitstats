@@ -715,6 +715,7 @@ class ReportCreator:
 	def create(self, data, path):
 		self.data = data
 		self.path = path
+		self.projectname = data.projectname
 
 def html_linkify(text):
 	return text.lower().replace(' ', '_')
@@ -726,7 +727,6 @@ def html_header(level, text):
 class HTMLReportCreator(ReportCreator):
 	def create(self, data, path):
 		ReportCreator.create(self, data, path)
-		self.title = data.projectname
 
 		# copy static files. Looks in the binary directory, ../share/gitstats and /usr/share/gitstats
 		binarypath = os.path.dirname(os.path.abspath(__file__))
@@ -1329,7 +1329,7 @@ plot """
 	<script type="text/javascript" src="sortable.js"></script>
 </head>
 <body>
-""" % (self.title, conf['style'], getversion()))
+""" % (self.projectname, conf['style'], getversion()))
 
 	def printNav(self, f):
 		f.write("""
