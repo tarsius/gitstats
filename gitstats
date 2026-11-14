@@ -737,9 +737,6 @@ class HTMLReportCreator(ReportCreator):
 				src = base + '/' + file
 				if os.path.exists(src):
 					shutil.copyfile(src, path + '/' + file)
-					break
-			else:
-				print('Warning: "%s" not found, so not copied (searched: %s)' % (file, basedirs))
 
 		f = open(path + "/index.html", 'w')
 		format = '%Y-%m-%d %H:%M:%S'
